@@ -1,0 +1,42 @@
+<div class="login-container">
+    <div class="login-content">
+
+        <div class="circle-and-heading">
+            <p class="circle">
+             <img src="/assets/Rocket.svg" alt=""/>
+            </p>
+            <div class="w-45">
+                <h2>CCA Cockpit</h2>
+                <p class="ml-3"><small>Powered by</small> ETAP</p>
+            </div>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form" *ngIf="loginStatus">
+            <div class="w-100">
+                <input class="input" type="email" id="email" formControlName="email" placeholder="Email/SSO Id"
+                    required>
+                <div
+                    *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                    <div *ngIf="loginForm.get('email').errors?.['required']"  class="text-red ml-1"><small>Email is required</small></div>
+                    <div *ngIf="loginForm.get('email').errors?.['email']"  class="text-red ml-1"><small>Invalid email format</small></div>
+                </div>
+            </div>
+            <div class="w-100">
+                <input class="input" type="password" id="password" formControlName="password" placeholder="Password"
+                    required>
+                <div
+                    *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                    <div *ngIf="loginForm.get('password').errors?.['required']" class="text-red ml-1"><small>Password is required</small></div>
+                </div>
+            </div>
+            <div class="text-red w-100 ml-1" *ngIf="errorMsg"><small>{{errorMsg}}</small></div>
+            <button class="btn mt-2" type="submit" [disabled]="loginForm.invalid">Login</button>  
+        </form>
+        <div *ngIf="!loginStatus">
+            <h2>You have successfully Logged out thank you</h2>
+            <button class="btn" (click)="handleLogin()">Back to Login</button>
+        </div>
+
+
+    </div>
+</div>
